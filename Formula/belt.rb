@@ -1,7 +1,7 @@
 class Belt < Formula
   desc "CLI for inference.sh — run AI apps, manage skills, connect MCP servers"
   homepage "https://inference.sh"
-  version "v1.14.11"
+  version "1.14.11"
 
   on_macos do
     if Hardware::CPU.arm?
