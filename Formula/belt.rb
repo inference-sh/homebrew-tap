@@ -6,20 +6,20 @@ class Belt < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://dist.inference.sh/cli/v1.15.30/inferencesh-cli-v1.15.30-darwin-arm64.tar.gz"
-      sha256 "8671652fba6791425bfe1cd113a941737326f7c94f19aff66bd29a23b9a5b846"
+      sha256 "ee084678a7e5b0a09eead84f4986fc3d28c6e6e0ce63032589304160e85578ff"
     else
       url "https://dist.inference.sh/cli/v1.15.30/inferencesh-cli-v1.15.30-darwin-amd64.tar.gz"
-      sha256 "e91f9d0f4287e285dda8502f3b469b3e1026efb6c701cb319decd17968e877db"
+      sha256 "019961ce6b7113f68d4e2f95ae5ab0b849beced521244286b88d2cb5d06aa28c"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://dist.inference.sh/cli/v1.15.30/inferencesh-cli-v1.15.30-linux-arm64.tar.gz"
-      sha256 "6ec10f656761ece96ffc20227af971cb86a70a9ef89ac3d8d8d671fb0558167f"
+      sha256 "8108c3ca94e6ddacdd7c83d4befc184dad20365ade34a7fe62ec6ecadb26a77f"
     else
       url "https://dist.inference.sh/cli/v1.15.30/inferencesh-cli-v1.15.30-linux-amd64.tar.gz"
-      sha256 "9c8a514a0d2458401f4cd256e104aa7e9cb636b9dd6fab182bdaa7c6dd47b187"
+      sha256 "cac9d199fb5bd0c81476329a6e411ca3ca73eab347753c8d0f9569422e9e2eef"
     end
   end
 
