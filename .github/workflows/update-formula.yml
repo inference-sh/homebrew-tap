@@ -1,0 +1,85 @@
+name: Update formula
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g. v1.16.21)"
+        required: true
+      sha_darwin_arm64:
+        description: "SHA256 for darwin-arm64 archive"
+        required: true
+      sha_darwin_amd64:
+        description: "SHA256 for darwin-amd64 archive"
+        required: true
+      sha_linux_amd64:
+        description: "SHA256 for linux-amd64 archive"
+        required: true
+      sha_linux_arm64:
+        description: "SHA256 for linux-arm64 archive"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update formula
+        env:
+          VERSION: ${{ inputs.version }}
+          SHA_DARWIN_ARM64: ${{ inputs.sha_darwin_arm64 }}
+          SHA_DARWIN_AMD64: ${{ inputs.sha_darwin_amd64 }}
+          SHA_LINUX_AMD64: ${{ inputs.sha_linux_amd64 }}
+          SHA_LINUX_ARM64: ${{ inputs.sha_linux_arm64 }}
+        run: |
+          BARE_VERSION="${VERSION#v}"
+          cat > Formula/belt.rb << EOF
+          class Belt < Formula
+            desc "CLI for inference.sh — run AI apps, manage skills, connect MCP servers"
+            homepage "https://inference.sh"
+            version "$BARE_VERSION"
+
+            on_macos do
+              if Hardware::CPU.arm?
+                url "https://dist.inference.sh/cli/${VERSION}/inferencesh-cli-${VERSION}-darwin-arm64.tar.gz"
+                sha256 "$SHA_DARWIN_ARM64"
+              else
+                url "https://dist.inference.sh/cli/${VERSION}/inferencesh-cli-${VERSION}-darwin-amd64.tar.gz"
+                sha256 "$SHA_DARWIN_AMD64"
+              end
+            end
+
+            on_linux do
+              if Hardware::CPU.arm?
+                url "https://dist.inference.sh/cli/${VERSION}/inferencesh-cli-${VERSION}-linux-arm64.tar.gz"
+                sha256 "$SHA_LINUX_ARM64"
+              else
+                url "https://dist.inference.sh/cli/${VERSION}/inferencesh-cli-${VERSION}-linux-amd64.tar.gz"
+                sha256 "$SHA_LINUX_AMD64"
+              end
+            end
+
+            def install
+              binary = Dir["inferencesh-cli-*"].first
+              bin.install binary => "belt"
+              bin.install_symlink "belt" => "infsh"
+              bin.install_symlink "belt" => "inferencesh"
+            end
+
+            test do
+              assert_match version.to_s, shell_output("#{bin}/belt version")
+            end
+          end
+          EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/belt.rb
+          git commit -m "belt ${{ inputs.version }}"
+          git push
