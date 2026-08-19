@@ -1,25 +1,25 @@
 class Belt < Formula
   desc "CLI for inference.sh — run AI apps, manage skills, connect MCP servers"
   homepage "https://inference.sh"
-  version "1.17.18"
+  version "1.17.19"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://dist.inference.sh/cli/v1.17.18/inferencesh-cli-v1.17.18-darwin-arm64.tar.gz"
-      sha256 "35b4534826ac833ad53970c72d00352e7c524726880f760fca02f8679e68e6a9"
+      url "https://dist.inference.sh/cli/v1.17.19/inferencesh-cli-v1.17.19-darwin-arm64.tar.gz"
+      sha256 "1d18383a7f32e3525896f68358696350e9f53fc1b45c66d548dcbf112c42fd57"
     else
-      url "https://dist.inference.sh/cli/v1.17.18/inferencesh-cli-v1.17.18-darwin-amd64.tar.gz"
-      sha256 "dce62fea198d92448574da7e47508f73e30800ef2e208758f4194f93d1fb32c8"
+      url "https://dist.inference.sh/cli/v1.17.19/inferencesh-cli-v1.17.19-darwin-amd64.tar.gz"
+      sha256 "6c0e55de17d1a3b5a6ca8f4962dd224182cac57843448f4bfe30fa56fa1cefdf"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://dist.inference.sh/cli/v1.17.18/inferencesh-cli-v1.17.18-linux-arm64.tar.gz"
-      sha256 "18ca7acdcb04e7e5daf64132204aa49837be9f4411d158cbe0fc3d25b395e210"
+      url "https://dist.inference.sh/cli/v1.17.19/inferencesh-cli-v1.17.19-linux-arm64.tar.gz"
+      sha256 "ef1d798c0062a6f015035cca94b053525a006aaec899f8f96844f111f3142d78"
     else
-      url "https://dist.inference.sh/cli/v1.17.18/inferencesh-cli-v1.17.18-linux-amd64.tar.gz"
-      sha256 "0c554e984c20fb78ba79d2b8d38eb15becdbabfdae2d051b8ba4bce1ec4f1dd8"
+      url "https://dist.inference.sh/cli/v1.17.19/inferencesh-cli-v1.17.19-linux-amd64.tar.gz"
+      sha256 "5fcf39c41c5900d45d24343d742f1b95f8efdb50d8f9c3d84122ee5c7503fe64"
     end
   end
 
