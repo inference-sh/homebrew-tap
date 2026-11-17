@@ -84,4 +84,4 @@ jobs:
           git commit -m "belt ${{ inputs.version }}"
           # main only moves through a PR (org ruleset, no bypass). The commit goes to
           # dev; inference-sh/cli's release opens the PR and merges it into main.
-          git push --force origin HEAD:dev
+          git push origin HEAD:main && git push --force origin HEAD:dev
